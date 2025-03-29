@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apple Music検索 | 乃木坂ことだま箱</title>
+  <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Klee One', sans-serif; background-color: #fdf9f6; color: #4a355f; padding: 30px; }
+    h1 { color: #6a4c93; }
+    input[type="text"] {
+      padding: 10px;
+      width: 70%;
+      font-size: 16px;
+      border: 2px solid #c8b3d9;
+      border-radius: 8px;
+    }
+    button {
+      padding: 10px 18px;
+      background-color: #c8b3d9;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-left: 10px;
+    }
+    button:hover { background-color: #a68ac5; }
+    #results {
+      margin-top: 30px;
+      font-size: 16px;
+    }
+    a {
+      color: #6a4c93;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎧 Apple Music 楽曲検索</h1>
+  <p>曲名を入力して、Apple Musicリンクを探そう！</p>
+  <input type="text" id="searchTerm" placeholder="例：僕がいる場所 乃木坂46">
+  <button onclick="searchMusic()">検索</button>
+
+  <div id="results"></div>
+
+  <script>
+    function searchMusic() {
+      const query = document.getElementById('searchTerm').value;
+      const url = "https://itunes.apple.com/search?term=" + encodeURIComponent(query) + "&country=JP&entity=song&limit=1";
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const resultsDiv = document.getElementById('results');
+          resultsDiv.innerHTML = "";
+
+          if (data.results.length === 0) {
+            resultsDiv.innerHTML = "<p>該当する曲が見つかりませんでした。</p>";
+            return;
+          }
+
+          const track = data.results[0];
+          const html = `
+            <p><strong>🎵 曲名：</strong>${track.trackName}</p>
+            <p><strong>👤 アーティスト：</strong>${track.artistName}</p>
+            <p><a href="${track.trackViewUrl}" target="_blank">▶ Apple Musicで聴く</a></p>
+          `;
+          resultsDiv.innerHTML = html;
+        })
+        .catch(error => {
+          console.error("検索エラー:", error);
+          document.getElementById('results').innerHTML = "<p>検索中にエラーが発生しました。</p>";
+        });
+    }
+  </script>
+</body>
+</html>
