@@ -1,140 +1,105 @@
-from pathlib import Path
-
-# Apple Music / YouTube / サイト内検索 切替付き検索窓付きトップページ
-
-index_tags_search_3way = Path("/mnt/data/index_tags_search_3way.html")
-
-index_tags_search_3way_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>乃木坂ことだま箱 | エモタグ分類 + 多機能検索</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>乃木坂ことだま箱 | タグ分類と検索</title>
   <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Klee One', sans-serif; background-color: #fff8f2; color: #4a355f; margin: 0; padding: 0; }
     header { background-color: #fce2e2; padding: 20px 10px; text-align: center; border-bottom: 3px solid #d4b3db; }
-    header img { max-width: 70%; height: auto; display: block; margin: 0 auto 10px; }
+    header img { max-width: 220px; height: auto; display: block; margin: 0 auto 10px; }
     header p { margin: 0; font-size: 15px; color: #6a4c93; }
-    .container { max-width: 850px; margin: 40px auto; padding: 0 20px; }
+    .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
     h1 { font-size: 26px; color: #6a4c93; text-align: center; margin-bottom: 10px; }
-    h2 { font-size: 20px; margin-top: 50px; color: #4a355f; border-left: 8px solid #d4b3db; padding-left: 10px; }
+    h2 { font-size: 20px; margin-top: 50px; border-left: 8px solid #d4b3db; padding-left: 10px; }
     ul { list-style: none; padding: 0; }
-    li { margin-bottom: 18px; background: #fff; padding: 15px; border: 2px solid #f1d3f3; border-radius: 12px;
+    li { margin-bottom: 20px; background: #fff; padding: 15px; border: 2px solid #f1d3f3; border-radius: 12px;
          box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
     a { text-decoration: none; color: #4a355f; font-weight: bold; }
     a:hover { text-decoration: underline; }
     .footer { text-align: center; font-size: 13px; color: #a493b5; margin: 50px 0 20px; }
 
-    .search-box { margin-top: 40px; text-align: center; }
+    .emoji { margin-right: 8px; font-size: 20px; }
+
+    .search-box { text-align: center; margin-top: 30px; }
     input[type="text"] {
-      padding: 10px;
-      width: 60%;
-      font-size: 16px;
-      border: 2px solid #c8b3d9;
-      border-radius: 8px;
+      padding: 10px; font-size: 16px; width: 60%; max-width: 400px; border-radius: 6px;
+      border: 1.5px solid #bfa8cf; margin-bottom: 10px;
     }
-    select {
-      padding: 10px;
+    select, button {
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: none;
       font-size: 15px;
-      margin-left: 10px;
-      border-radius: 8px;
+      margin-left: 5px;
     }
     button {
-      padding: 10px 16px;
       background-color: #c8b3d9;
       color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 15px;
-      margin-left: 10px;
-    }
-    button:hover { background-color: #a68ac5; }
-    #results {
-      margin-top: 20px;
-      font-size: 16px;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="A_logo_design_in_digital_2D_art_medium_features_a_.png" alt="乃木坂ことだま箱 ロゴ">
+    <img src="logo.png" alt="乃木坂ことだま箱 ロゴ">
     <p>Volではなく、感情でつながる。タグで読み解く乃木坂のことだま。</p>
   </header>
 
   <div class="container">
-    <h1>乃木坂ことだま箱 - タグ分類</h1>
+    <h1>乃木坂ことだま箱 - タグ分類と検索</h1>
 
     <div class="search-box">
-      <h2>🔍 楽曲・映像・エピソード検索</h2>
-      <input type="text" id="searchTerm" placeholder="曲名やメンバー名を入力">
-      <select id="searchType">
-        <option value="apple">🎧 Apple Music</option>
-        <option value="youtube">▶ YouTube</option>
-        <option value="site">🔍 サイト内検索</option>
-      </select>
-      <button onclick="search()">検索</button>
-      <div id="results"></div>
+      <form action="https://www.google.com/search" method="get" target="_blank">
+        <input type="text" name="q" placeholder="曲名やメンバー名を入力">
+        <select name="as_sitesearch">
+          <option value="music.apple.com">Apple Music</option>
+          <option value="youtube.com">YouTube</option>
+          <option value="tokinotaiga.github.io/kotodamabako">サイト内検索</option>
+        </select>
+        <button type="submit">検索</button>
+      </form>
     </div>
 
-    <script>
-      const sitePages = {
-        "アルノ": "aruno_actually.html",
-        "さくら": "endo_silent_power.html",
-        "五百城": "ioki_tears.html",
-        "飛鳥": "asuka_aya_trust.html",
-        "彩": "asuka_aya_trust.html"
-      };
+    <h2><span class="emoji">💎</span>自己と向き合うエモ</h2>
+    <ul>
+      <li>
+        <a href="aruno_actually.html">中西アルノ、決意の『Actually…』</a><br>
+        ── 再起を図りたいときに効く、魂の1曲 ──<br><br>
+        加入直後にセンターへ抜擢されるも、スキャンダルによって一時降板。<br>
+        その苦しみと葛藤を乗り越え、「この曲を通じて出会えた人たちが大好き」と語ったMCは、会場全体に強いことだまを届けた。
+      </li>
+    </ul>
 
-      function search() {
-        const term = document.getElementById("searchTerm").value.trim();
-        const type = document.getElementById("searchType").value;
-        const results = document.getElementById("results");
-        results.innerHTML = "";
+    <h2><span class="emoji">🤝</span>関係の中にあるエモ</h2>
+    <ul>
+      <li>
+        <a href="endo_silent_power.html">遠藤さくら、静かな強さ</a><br>
+        ── 優しさと絆が響いた、MCと1曲 ──<br><br>
+        11thバスラ・4期生ライブ。<br>
+        同期一人ひとりへの感謝と決意を静かに語った遠藤の姿に、メンバーが涙。<br>
+        掛橋へのメッセージ、最後の「みんな、がんばろう」に“静かな強さ”が宿っていた。
+      </li>
+      <li>
+        <a href="ioki_tears.html">五百城茉央、涙の『愛のうた』</a><br>
+        ── 涙とやさしさが交差した、神戸の夜 ──<br><br>
+        声が出ない本番、涙をこらえて歌いきる五百城。<br>
+        ダンサーとして寄り添った岡本の気遣いが胸を打ち、努力と友情が交錯した感動のステージとなった。
+      </li>
+      <li>
+        <a href="asuka_aya_trust.html">齋藤飛鳥 × 小川彩『信頼のはじまり』</a><br>
+        ── 憧れが、絆へと変わった瞬間 ──<br><br>
+        加入前から憧れていた飛鳥へ、バレンタインでチョコを贈った小川。<br>
+        「彩は信頼できる」と笑顔を見せた飛鳥のひと言に、世代を超えたバトンのような“信頼”が重なった。
+      </li>
+    </ul>
 
-        if (!term) return;
-
-        if (type === "apple") {
-          const url = "https://itunes.apple.com/search?term=" + encodeURIComponent(term) + "&country=JP&entity=song&limit=1";
-          fetch(url)
-            .then(res => res.json())
-            .then(data => {
-              if (data.results.length === 0) {
-                results.innerHTML = "<p>Apple Musicで見つかりませんでした。</p>";
-                return;
-              }
-              const track = data.results[0];
-              results.innerHTML = `
-                <p><strong>🎵 ${track.trackName}</strong> by ${track.artistName}</p>
-                <p><a href="${track.trackViewUrl}" target="_blank">▶ Apple Musicで聴く</a></p>`;
-            });
-        } else if (type === "youtube") {
-          const ytUrl = "https://www.youtube.com/results?search_query=" + encodeURIComponent(term + " 乃木坂46");
-          window.open(ytUrl, "_blank");
-        } else if (type === "site") {
-          for (const key in sitePages) {
-            if (term.includes(key)) {
-              location.href = sitePages[key];
-              return;
-            }
-          }
-          results.innerHTML = "<p>サイト内に該当ページが見つかりませんでした。</p>";
-        }
-      }
-    </script>
-
+    <h2><span class="emoji">🌸</span>希望と未来のエモ</h2>
+    <ul>
+      <li>（次回追加予定）</li>
+    </ul>
   </div>
 
   <div class="footer">© 乃木坂ことだま箱 | 感情でつながるファンサイト</div>
 </body>
 </html>
-"""
-
-index_tags_search_3way.write_text(index_tags_search_3way_content, encoding="utf-8")
-index_tags_search_3way.name
-
-"""
-
-index_tags.write_text(index_tags_content, encoding="utf-8")
-index_tags.name
