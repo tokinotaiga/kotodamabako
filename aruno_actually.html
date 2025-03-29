@@ -94,5 +94,54 @@
       <li><a href="https://youtu.be/9SS_uqzyhok?si=c1VRPMwWNZrYWURX" target="_blank">『命は美しい』</a> ─ つらさの先に見える「生きる意味」とその美しさ。</li>
     </ul>
   </div>
+
+<div class="reactions">
+  <p style="font-weight:bold;">🫶 共感リアクション</p>
+  <button onclick="addReaction('like')" id="likeBtn">🤍 共感 (<span id="likeCount">0</span>)</button>
+  <button onclick="addReaction('cry')" id="cryBtn">😭 泣いた (<span id="cryCount">0</span>)</button>
+  <button onclick="addReaction('clap')" id="clapBtn">👏 拍手 (<span id="clapCount">0</span>)</button>
+  <button onclick="addReaction('fire')" id="fireBtn">🔥 熱い (<span id="fireCount">0</span>)</button>
+</div>
+<script>
+  function loadReactions() {
+    ['like', 'cry', 'clap', 'fire'].forEach(key => {
+      const count = localStorage.getItem(key + '_' + location.pathname) || 0;
+      document.getElementById(key + 'Count').textContent = count;
+    });
+  }
+  function addReaction(key) {
+    const fullKey = key + '_' + location.pathname;
+    let count = localStorage.getItem(fullKey) || 0;
+    count++;
+    localStorage.setItem(fullKey, count);
+    document.getElementById(key + 'Count').textContent = count;
+  }
+  window.onload = loadReactions;
+</script>
+<style>
+  .reactions {
+    margin-top: 40px;
+    background: #f3e9ff;
+    border: 1px solid #c9b3e9;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  .reactions button {
+    font-size: 15px;
+    padding: 8px 16px;
+    margin: 6px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: #e0d4f7;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  .reactions button:hover {
+    background-color: #d0b8f0;
+    transform: scale(1.05);
+  }
+</style>
+
 </body>
 </html>
