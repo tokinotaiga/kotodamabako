@@ -1,89 +1,52 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>齋藤飛鳥 × 小川彩『信頼のはじまり』 | 乃木坂ことだま箱</title>
-  <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
-  <style>
-    a.button {
-      transition: transform 0.3s ease, background-color 0.3s ease;
-    }
-    a.button:hover {
-      transform: scale(1.05);
-      background-color: #b395c6;
-    }
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>asuka_aya_trust.html</title></head>
+    <body><h1>asuka_aya_trust.html</h1><p>（仮）本文です。</p>
+<div class="reactions">
+  <p style="font-weight:bold;">🫶 共感リアクション</p>
+  <button onclick="addReaction('like')" id="likeBtn">🤍 共感 (<span id="likeCount">0</span>)</button>
+  <button onclick="addReaction('cry')" id="cryBtn">😭 泣いた (<span id="cryCount">0</span>)</button>
+  <button onclick="addReaction('clap')" id="clapBtn">👏 拍手 (<span id="clapCount">0</span>)</button>
+  <button onclick="addReaction('fire')" id="fireBtn">🔥 熱い (<span id="fireCount">0</span>)</button>
+</div>
+<script>
+  function loadReactions() {
+    ['like', 'cry', 'clap', 'fire'].forEach(key => {
+      const count = localStorage.getItem(key + '_' + location.pathname) || 0;
+      document.getElementById(key + 'Count').textContent = count;
+    });
+  }
 
-    ul li a {
-      transition: color 0.3s ease;
-    }
-    ul li a:hover {
-      color: #6a4c93;
-    }
-    
-    @keyframes fadeInZoom {
-      0% { opacity: 0; transform: scale(0.95); }
-      100% { opacity: 1; transform: scale(1); }
-    }
+  function addReaction(key) {
+    const fullKey = key + '_' + location.pathname;
+    let count = localStorage.getItem(fullKey) || 0;
+    count++;
+    localStorage.setItem(fullKey, count);
+    document.getElementById(key + 'Count').textContent = count;
+  }
 
-    .kotodama {
-      display: inline-block;
-      opacity: 0;
-      animation: fadeInZoom 1s ease-out forwards;
-      animation-delay: 0.8s;
-      margin-top: 25px;
-      font-weight: bold;
-      font-size: 18px;
-      color: #6a4c93;
-    }
-
-    body { font-family: 'Klee One', sans-serif; background-color: #fff8f2; color: #4a355f; margin: 0; padding: 30px; }
-    h1 { color: #6a4c93; font-size: 26px; }
-    p { font-size: 16px; line-height: 1.8; }
-    .section { margin-top: 40px; }
-    a.button {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 16px;
-      background-color: #c8b3d9;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-    }
-    a.button:hover {
-      background-color: #a68ac5;
-    }
-    ul { margin-top: 10px; padding-left: 20px; }
-    li { margin-bottom: 8px; }
-  </style>
-</head>
-<body>
-  <h1>齋藤飛鳥 × 小川彩『信頼のはじまり』</h1>
-
-  <p>
-    小川彩は、乃木坂加入前から齋藤飛鳥に強い憧れを抱いていた。<br>
-    特に齋藤のドラムパフォーマンスに感銘を受け、自らもドラムを始めるきっかけになったほど。<br><br>
-
-    加入後もなかなか話しかけられなかったが、全国ツアーの後についに言葉を交わすことができ、<br>
-    ブログには喜びと感動があふれていた。<br><br>
-
-    そんな二人の関係が動いたのが、2022年の『乃木坂工事中』バレンタイン企画。<br>
-    バレンタインで連敗続きだった齋藤に、小川がチョコレートを渡し、<br>
-    齋藤は「彩は信頼できる」と笑顔を見せた。<br><br>
-
-    憧れから始まった気持ちが、<span class="kotodama">確かな信頼と絆へと育っていた</span>──そんな感動的な瞬間だった。
-  </p>
-
-  <div class="section">
-    <h3>🎧 この感情に効く1曲</h3>
-    <p><strong>『きっかけ』</strong> ─ すべてが始まった、小さな想いの種。</p>
-    <a class="button" href="https://youtu.be/6W8mmtgeOzY?si=1FWplS641JxhARRY" target="_blank">🎵 曲を聴く（YouTube）</a>
-
-    <h4 style="margin-top: 30px;">🎶 他にも寄り添う楽曲たち</h4>
-    <ul>
-      <li><a href="https://youtu.be/PCIGe083SY0?si=pnxZNcSvxAJtc170" target="_blank">『やさしさとは』</a> ─ 何気ない行動の中に宿る本当のやさしさ。</li>
-      <li><a href="https://youtu.be/mZkeNK0RQ04?si=cqBXhpnLF5gFzxuN" target="_blank">『ありがちな恋愛』</a> ─ すれ違いと共鳴、その繊細な心の温度。</li>
-    </ul>
-  </div>
-</body>
-</html>
+  window.onload = loadReactions;
+</script>
+<style>
+  .reactions {
+    margin-top: 40px;
+    background: #f3e9ff;
+    border: 1px solid #c9b3e9;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  .reactions button {
+    font-size: 15px;
+    padding: 8px 16px;
+    margin: 6px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: #e0d4f7;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  .reactions button:hover {
+    background-color: #d0b8f0;
+    transform: scale(1.05);
+  }
+</style>
+</body></html>

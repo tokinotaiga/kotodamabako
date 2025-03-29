@@ -1,89 +1,52 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>遠藤さくら『静かな強さ』 | 乃木坂ことだま箱</title>
-  <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
-  <style>
-    a.button {
-      transition: transform 0.3s ease, background-color 0.3s ease;
-    }
-    a.button:hover {
-      transform: scale(1.05);
-      background-color: #b395c6;
-    }
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>endo_silent_power.html</title></head>
+    <body><h1>endo_silent_power.html</h1><p>（仮）本文です。</p>
+<div class="reactions">
+  <p style="font-weight:bold;">🫶 共感リアクション</p>
+  <button onclick="addReaction('like')" id="likeBtn">🤍 共感 (<span id="likeCount">0</span>)</button>
+  <button onclick="addReaction('cry')" id="cryBtn">😭 泣いた (<span id="cryCount">0</span>)</button>
+  <button onclick="addReaction('clap')" id="clapBtn">👏 拍手 (<span id="clapCount">0</span>)</button>
+  <button onclick="addReaction('fire')" id="fireBtn">🔥 熱い (<span id="fireCount">0</span>)</button>
+</div>
+<script>
+  function loadReactions() {
+    ['like', 'cry', 'clap', 'fire'].forEach(key => {
+      const count = localStorage.getItem(key + '_' + location.pathname) || 0;
+      document.getElementById(key + 'Count').textContent = count;
+    });
+  }
 
-    ul li a {
-      transition: color 0.3s ease;
-    }
-    ul li a:hover {
-      color: #6a4c93;
-    }
-    
-    @keyframes fadeInZoom {
-      0% { opacity: 0; transform: scale(0.95); }
-      100% { opacity: 1; transform: scale(1); }
-    }
+  function addReaction(key) {
+    const fullKey = key + '_' + location.pathname;
+    let count = localStorage.getItem(fullKey) || 0;
+    count++;
+    localStorage.setItem(fullKey, count);
+    document.getElementById(key + 'Count').textContent = count;
+  }
 
-    .kotodama {
-      display: inline-block;
-      opacity: 0;
-      animation: fadeInZoom 1s ease-out forwards;
-      animation-delay: 0.8s;
-      margin-top: 25px;
-      font-weight: bold;
-      font-size: 18px;
-      color: #6a4c93;
-    }
-
-    body { font-family: 'Klee One', sans-serif; background-color: #fff8f2; color: #4a355f; margin: 0; padding: 30px; }
-    h1 { color: #6a4c93; font-size: 26px; }
-    p { font-size: 16px; line-height: 1.8; }
-    .section { margin-top: 40px; }
-    a.button {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 16px;
-      background-color: #c8b3d9;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-    }
-    a.button:hover {
-      background-color: #a68ac5;
-    }
-    ul { margin-top: 10px; padding-left: 20px; }
-    li { margin-bottom: 8px; }
-  </style>
-</head>
-<body>
-  <h1>遠藤さくら『静かな強さ』</h1>
-  <p>
-    11thバスラ・4期生単独ライブ。<br><br>
-    普段はあまり多くを語らない遠藤さくらが、同期一人ひとりに向けて丁寧に言葉を紡いだ。<br><br>
-    4期生として歩んできた時間を振り返りながら、それぞれのメンバーに対する感謝と敬意、そして今届けたい想いを静かに語っていく。<br><br>
-    休業中の掛橋沙耶香へのメッセージも、言葉を飾ることなくまっすぐに。<br>
-    その想いの強さが伝わり、会場全体があたたかい空気に包まれていった。<br><br>
-    そして、その後に披露された「4番目の光」。<br>
-    ステージ上で金川紗耶や弓木奈於が涙を見せる場面もあり、<br>
-    あらためて4期生同士の絆の深さを感じる瞬間となった。<br><br>
-    すべてのメッセージを届け終えたあと、遠藤さくらは最後にひとこと、<br>
-    静かに、けれど力強くこう言った。<br><br>
-    「<span class="kotodama">みんな、がんばろう。</span>」<br><br>
-    その言葉が、今までの歩みとこれからをつなぐ、確かな“ことだま”として胸に残った。
-  </p>
-
-  <div class="section">
-    <h3>🎧 この感情に効く1曲</h3>
-    <p><strong>『4番目の光』</strong> ─ 仲間への想いがあふれる、4期生の代表曲。</p>
-    <a class="button" href="https://youtu.be/WQTshyuqz-w?si=je22P2PL0LUcdfgq" target="_blank">🎵 曲を聴く（YouTube）</a>
-
-    <h4 style="margin-top: 30px;">🎶 他にも寄り添う楽曲たち</h4>
-    <ul>
-      <li><a href="https://youtu.be/9SS_uqzyhok?si=c1VRPMwWNZrYWURX" target="_blank">『命は美しい』</a> ─ 心を解き放つ、静かな生命賛歌。</li>
-      <li><a href="https://youtu.be/cyqH1h4fU_I?si=YJhoUPChseUe6a5h" target="_blank">『何度目の青空か』</a> ─ 背中を押してくれる、未来への一歩。</li>
-    </ul>
-  </div>
-</body>
-</html>
+  window.onload = loadReactions;
+</script>
+<style>
+  .reactions {
+    margin-top: 40px;
+    background: #f3e9ff;
+    border: 1px solid #c9b3e9;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  .reactions button {
+    font-size: 15px;
+    padding: 8px 16px;
+    margin: 6px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: #e0d4f7;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  .reactions button:hover {
+    background-color: #d0b8f0;
+    transform: scale(1.05);
+  }
+</style>
+</body></html>

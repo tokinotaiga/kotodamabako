@@ -1,89 +1,52 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>五百城茉央『愛のうた』 | 乃木坂ことだま箱</title>
-  <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
-  <style>
-    a.button {
-      transition: transform 0.3s ease, background-color 0.3s ease;
-    }
-    a.button:hover {
-      transform: scale(1.05);
-      background-color: #b395c6;
-    }
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>ioki_tears.html</title></head>
+    <body><h1>ioki_tears.html</h1><p>（仮）本文です。</p>
+<div class="reactions">
+  <p style="font-weight:bold;">🫶 共感リアクション</p>
+  <button onclick="addReaction('like')" id="likeBtn">🤍 共感 (<span id="likeCount">0</span>)</button>
+  <button onclick="addReaction('cry')" id="cryBtn">😭 泣いた (<span id="cryCount">0</span>)</button>
+  <button onclick="addReaction('clap')" id="clapBtn">👏 拍手 (<span id="clapCount">0</span>)</button>
+  <button onclick="addReaction('fire')" id="fireBtn">🔥 熱い (<span id="fireCount">0</span>)</button>
+</div>
+<script>
+  function loadReactions() {
+    ['like', 'cry', 'clap', 'fire'].forEach(key => {
+      const count = localStorage.getItem(key + '_' + location.pathname) || 0;
+      document.getElementById(key + 'Count').textContent = count;
+    });
+  }
 
-    ul li a {
-      transition: color 0.3s ease;
-    }
-    ul li a:hover {
-      color: #6a4c93;
-    }
-    
-    @keyframes fadeInZoom {
-      0% { opacity: 0; transform: scale(0.95); }
-      100% { opacity: 1; transform: scale(1); }
-    }
+  function addReaction(key) {
+    const fullKey = key + '_' + location.pathname;
+    let count = localStorage.getItem(fullKey) || 0;
+    count++;
+    localStorage.setItem(fullKey, count);
+    document.getElementById(key + 'Count').textContent = count;
+  }
 
-    .kotodama {
-      display: inline-block;
-      opacity: 0;
-      animation: fadeInZoom 1s ease-out forwards;
-      animation-delay: 0.8s;
-      margin-top: 25px;
-      font-weight: bold;
-      font-size: 18px;
-      color: #6a4c93;
-    }
-
-    body { font-family: 'Klee One', sans-serif; background-color: #fff8f2; color: #4a355f; margin: 0; padding: 30px; }
-    h1 { color: #6a4c93; font-size: 26px; }
-    p { font-size: 16px; line-height: 1.8; }
-    .section { margin-top: 40px; }
-    a.button {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 16px;
-      background-color: #c8b3d9;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-    }
-    a.button:hover {
-      background-color: #a68ac5;
-    }
-    ul { margin-top: 10px; padding-left: 20px; }
-    li { margin-bottom: 8px; }
-  </style>
-</head>
-<body>
-  <h1>五百城茉央『愛のうた』</h1>
-
-  <p>
-    「新・乃木坂スター誕生LIVE」神戸公演。<br><br>
-    五百城茉央の地元・神戸での凱旋ステージ。<br>
-    彼女はこの日のために、いつも以上に練習に打ち込み、万全で臨もうとしていた。<br><br>
-    しかしその頑張りが裏目に出てしまい、本番では声が枯れてしまっていた。<br>
-    披露した「愛のうた」は、思うように歌声が出せず、涙を流しながらのパフォーマンスとなった。<br><br>
-    そのとき、そっと彼女に寄り添うように近づいてきたのが岡本姫奈だった。<br>
-    もともとダンサーとしてステージに立っていた彼女は、踊りながら五百城に近づき、アイコンタクトでそっと励ます。<br>
-    そのやさしさが、五百城の気持ちを後押ししてくれているように見えた。<br><br>
-    五百城の涙、努力、そして岡本の気遣い──<br>
-    すべてが同じステージの上で重なり合い、観る人の胸を強く打った。<br><br>
-    失敗も含めて、ステージに立つ姿そのものが、<span class="kotodama">何より美しく尊い</span>と感じられた瞬間だった。
-  </p>
-
-  <div class="section">
-    <h3>🎧 この感情に効く1曲</h3>
-    <p><strong>『愛のうた』</strong> ─ 涙の中で響いた、真っすぐな愛のメッセージ。</p>
-    <a class="button" href="https://youtu.be/JiWEZbm6lhI?si=HQcMLlYEmoW_rVJ5" target="_blank">🎵 曲を聴く（YouTube）</a>
-
-    <h4 style="margin-top: 30px;">🎶 他にも寄り添う楽曲たち</h4>
-    <ul>
-      <li><a href="https://youtu.be/43XXzowQrSk?si=BJJVhDLzOHyfxpvT" target="_blank">『設定温度』</a> ─ やさしさが静かに染み込むような一曲。</li>
-      <li><a href="https://youtu.be/PCIGe083SY0?si=pnxZNcSvxAJtc170" target="_blank">『やさしさとは』</a> ─ 想いが伝わることの尊さを教えてくれる。</li>
-    </ul>
-  </div>
-</body>
-</html>
+  window.onload = loadReactions;
+</script>
+<style>
+  .reactions {
+    margin-top: 40px;
+    background: #f3e9ff;
+    border: 1px solid #c9b3e9;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  .reactions button {
+    font-size: 15px;
+    padding: 8px 16px;
+    margin: 6px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: #e0d4f7;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  .reactions button:hover {
+    background-color: #d0b8f0;
+    transform: scale(1.05);
+  }
+</style>
+</body></html>
