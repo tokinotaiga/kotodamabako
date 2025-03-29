@@ -6,6 +6,16 @@
   <title>乃木坂ことだま箱 | タグ分類と検索</title>
   <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
   <style>
+    @keyframes slideInLeft {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .slide-in {
+      animation: slideInLeft 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
     body { font-family: 'Klee One', sans-serif; background-color: #fff8f2; color: #4a355f; margin: 0; padding: 0; }
     header { background-color: #fce2e2; padding: 20px 10px; text-align: center; border-bottom: 3px solid #d4b3db; }
     header img { max-width: 220px; height: auto; display: block; margin: 0 auto 10px; }
@@ -53,7 +63,7 @@
       <form action="https://www.google.com/search" method="get" target="_blank">
         <input type="text" name="q" placeholder="曲名やメンバー名を入力">
         <select name="as_sitesearch">
-          <option value="tokinotaiga.github.io">サイト内検索</option>
+          <option value="tokinotaiga.github.io/kotodamabako">サイト内検索</option>
           <option value="music.apple.com">Apple Music</option>
           <option value="youtube.com">YouTube</option>
         </select>
@@ -61,7 +71,7 @@
       </form>
     </div>
 
-    <h2><span class="emoji">💎</span>自己と向き合うエモ</h2>
+    <h2 class="slide-in"><span class="emoji">💎</span>自己と向き合うエモ</h2>
     <ul>
       <li>
         <a href="aruno_actually.html">中西アルノ、決意の『Actually…』</a><br>
@@ -71,7 +81,7 @@
       </li>
     </ul>
 
-    <h2><span class="emoji">🤝</span>関係の中にあるエモ</h2>
+    <h2 class="slide-in"><span class="emoji">🤝</span>関係の中にあるエモ</h2>
     <ul>
       <li>
         <a href="endo_silent_power.html">遠藤さくら、静かな強さ</a><br>
@@ -94,7 +104,7 @@
       </li>
     </ul>
 
-    <h2><span class="emoji">🌸</span>希望と未来のエモ</h2>
+    <h2 class="slide-in"><span class="emoji">🌸</span>希望と未来のエモ</h2>
     <ul>
       <li>（次回追加予定）</li>
     </ul>
