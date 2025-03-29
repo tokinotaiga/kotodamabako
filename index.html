@@ -1,14 +1,15 @@
 from pathlib import Path
 
-# 再定義：タグ分類型トップページ
-index_tags = Path("/mnt/data/index_tags.html")
+# Apple Music / YouTube / サイト内検索 切替付き検索窓付きトップページ
 
-index_tags_content = """<!DOCTYPE html>
+index_tags_search_3way = Path("/mnt/data/index_tags_search_3way.html")
+
+index_tags_search_3way_content = """<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>乃木坂ことだま箱 | エモタグ分類トップ</title>
+  <title>乃木坂ことだま箱 | エモタグ分類 + 多機能検索</title>
   <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Klee One', sans-serif; background-color: #fff8f2; color: #4a355f; margin: 0; padding: 0; }
@@ -24,6 +25,36 @@ index_tags_content = """<!DOCTYPE html>
     a { text-decoration: none; color: #4a355f; font-weight: bold; }
     a:hover { text-decoration: underline; }
     .footer { text-align: center; font-size: 13px; color: #a493b5; margin: 50px 0 20px; }
+
+    .search-box { margin-top: 40px; text-align: center; }
+    input[type="text"] {
+      padding: 10px;
+      width: 60%;
+      font-size: 16px;
+      border: 2px solid #c8b3d9;
+      border-radius: 8px;
+    }
+    select {
+      padding: 10px;
+      font-size: 15px;
+      margin-left: 10px;
+      border-radius: 8px;
+    }
+    button {
+      padding: 10px 16px;
+      background-color: #c8b3d9;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      margin-left: 10px;
+    }
+    button:hover { background-color: #a68ac5; }
+    #results {
+      margin-top: 20px;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
@@ -35,41 +66,74 @@ index_tags_content = """<!DOCTYPE html>
   <div class="container">
     <h1>乃木坂ことだま箱 - タグ分類</h1>
 
-    <h2>💎 自己と向き合うエモ</h2>
-    <ul>
-      <li>
-        <a href="aruno_actually.html">中西アルノ『Actually...』</a><br>
-        <span style="font-size: 14px;">── 自分の過去と葛藤に向き合う、魂のパフォーマンス</span>
-      </li>
-    </ul>
+    <div class="search-box">
+      <h2>🔍 楽曲・映像・エピソード検索</h2>
+      <input type="text" id="searchTerm" placeholder="曲名やメンバー名を入力">
+      <select id="searchType">
+        <option value="apple">🎧 Apple Music</option>
+        <option value="youtube">▶ YouTube</option>
+        <option value="site">🔍 サイト内検索</option>
+      </select>
+      <button onclick="search()">検索</button>
+      <div id="results"></div>
+    </div>
 
-    <h2>🤝 関係の中にあるエモ</h2>
-    <ul>
-      <li>
-        <a href="endo_silent_power.html">遠藤さくら『静かな強さ』</a><br>
-        <span style="font-size: 14px;">── 同期への手紙、そして「みんな、がんばろう」</span>
-      </li>
-      <li>
-        <a href="ioki_tears.html">五百城茉央『愛のうた』</a><br>
-        <span style="font-size: 14px;">── 岡本姫奈の優しさに背中を押された涙の歌声</span>
-      </li>
-      <li>
-        <a href="asuka_aya_trust.html">齋藤飛鳥 × 小川彩『信頼のはじまり』</a><br>
-        <span style="font-size: 14px;">── 憧れが信頼に変わった、バレンタインの一言</span>
-      </li>
-    </ul>
+    <script>
+      const sitePages = {
+        "アルノ": "aruno_actually.html",
+        "さくら": "endo_silent_power.html",
+        "五百城": "ioki_tears.html",
+        "飛鳥": "asuka_aya_trust.html",
+        "彩": "asuka_aya_trust.html"
+      };
 
-    <h2>🌸 希望と未来のエモ</h2>
-    <ul>
-      <li>
-        <em>※今後追加予定のエピソード</em>
-      </li>
-    </ul>
+      function search() {
+        const term = document.getElementById("searchTerm").value.trim();
+        const type = document.getElementById("searchType").value;
+        const results = document.getElementById("results");
+        results.innerHTML = "";
+
+        if (!term) return;
+
+        if (type === "apple") {
+          const url = "https://itunes.apple.com/search?term=" + encodeURIComponent(term) + "&country=JP&entity=song&limit=1";
+          fetch(url)
+            .then(res => res.json())
+            .then(data => {
+              if (data.results.length === 0) {
+                results.innerHTML = "<p>Apple Musicで見つかりませんでした。</p>";
+                return;
+              }
+              const track = data.results[0];
+              results.innerHTML = `
+                <p><strong>🎵 ${track.trackName}</strong> by ${track.artistName}</p>
+                <p><a href="${track.trackViewUrl}" target="_blank">▶ Apple Musicで聴く</a></p>`;
+            });
+        } else if (type === "youtube") {
+          const ytUrl = "https://www.youtube.com/results?search_query=" + encodeURIComponent(term + " 乃木坂46");
+          window.open(ytUrl, "_blank");
+        } else if (type === "site") {
+          for (const key in sitePages) {
+            if (term.includes(key)) {
+              location.href = sitePages[key];
+              return;
+            }
+          }
+          results.innerHTML = "<p>サイト内に該当ページが見つかりませんでした。</p>";
+        }
+      }
+    </script>
+
   </div>
 
   <div class="footer">© 乃木坂ことだま箱 | 感情でつながるファンサイト</div>
 </body>
 </html>
+"""
+
+index_tags_search_3way.write_text(index_tags_search_3way_content, encoding="utf-8")
+index_tags_search_3way.name
+
 """
 
 index_tags.write_text(index_tags_content, encoding="utf-8")
