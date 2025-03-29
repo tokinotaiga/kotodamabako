@@ -1,52 +1,98 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>aruno_actually.html</title></head>
-    <body><h1>aruno_actually.html</h1><p>（仮）本文です。</p>
-<div class="reactions">
-  <p style="font-weight:bold;">🫶 共感リアクション</p>
-  <button onclick="addReaction('like')" id="likeBtn">🤍 共感 (<span id="likeCount">0</span>)</button>
-  <button onclick="addReaction('cry')" id="cryBtn">😭 泣いた (<span id="cryCount">0</span>)</button>
-  <button onclick="addReaction('clap')" id="clapBtn">👏 拍手 (<span id="clapCount">0</span>)</button>
-  <button onclick="addReaction('fire')" id="fireBtn">🔥 熱い (<span id="fireCount">0</span>)</button>
-</div>
-<script>
-  function loadReactions() {
-    ['like', 'cry', 'clap', 'fire'].forEach(key => {
-      const count = localStorage.getItem(key + '_' + location.pathname) || 0;
-      document.getElementById(key + 'Count').textContent = count;
-    });
-  }
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>中西アルノ『Actually...』 | 乃木坂ことだま箱</title>
+  <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
+  <style>
+    a.button {
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    a.button:hover {
+      transform: scale(1.05);
+      background-color: #b395c6;
+    }
 
-  function addReaction(key) {
-    const fullKey = key + '_' + location.pathname;
-    let count = localStorage.getItem(fullKey) || 0;
-    count++;
-    localStorage.setItem(fullKey, count);
-    document.getElementById(key + 'Count').textContent = count;
-  }
+    ul li a {
+      transition: color 0.3s ease;
+    }
+    ul li a:hover {
+      color: #6a4c93;
+    }
+    
+    @keyframes fadeInZoom {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
 
-  window.onload = loadReactions;
-</script>
-<style>
-  .reactions {
-    margin-top: 40px;
-    background: #f3e9ff;
-    border: 1px solid #c9b3e9;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-  }
-  .reactions button {
-    font-size: 15px;
-    padding: 8px 16px;
-    margin: 6px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    background-color: #e0d4f7;
-    transition: background-color 0.3s, transform 0.2s;
-  }
-  .reactions button:hover {
-    background-color: #d0b8f0;
-    transform: scale(1.05);
-  }
-</style>
-</body></html>
+    .kotodama {
+      display: inline-block;
+      opacity: 0;
+      animation: fadeInZoom 1s ease-out forwards;
+      animation-delay: 0.8s;
+      margin-top: 25px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #6a4c93;
+    }
+
+    body { font-family: 'Klee One', sans-serif; background-color: #fff8f2; color: #4a355f; margin: 0; padding: 30px; }
+    h1 { color: #6a4c93; font-size: 26px; }
+    p { font-size: 16px; line-height: 1.8; }
+    .section { margin-top: 40px; }
+    a.button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 16px;
+      background-color: #c8b3d9;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+    a.button:hover {
+      background-color: #a68ac5;
+    }
+    ul { margin-top: 10px; padding-left: 20px; }
+    li { margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <h1>中西アルノ『Actually...』</h1>
+
+  <p>
+    中西アルノが11thバスラのステージで語った、自らの過去と向き合うMC。<br><br>
+
+    加入間もなく、彼女は『Actually…』のセンターに抜擢され、史上最速センターとして注目を集めた。<br>
+    しかしその後スキャンダルが報じられ、センターは別のメンバーに変更されることとなった。<br><br>
+
+    その経験を踏まえたうえで、彼女はこう語る。<br>
+    「わたしにはこの歌を伝える権利はないと思っていたし、今でもそれを完全に払拭しているとは思っていません。」<br><br>
+
+    涙をこらえながら語られたその言葉には、彼女が背負ってきた葛藤と向き合ってきた年月がにじんでいた。<br><br>
+
+    それでも──<br><br>
+
+    「この曲が好きで、<span class="kotodama">この曲を通じて出会えた人たちが大好きです。</span>」<br><br>
+
+    そう言葉を詰まらせながらも想いを届け、<br>
+    彼女は再びセンターとして『Actually…』をパフォーマンスした。<br><br>
+
+    その姿には、批判や不安を越えて、もう一度向き合おうとする強さと覚悟が宿っていた。<br>
+    叫ぶように歌う彼女のパフォーマンスに、会場からは歓声とエールが送られ、空気は大きく揺さぶられた。
+  </p>
+
+  <div class="section">
+    <h3>🎧 この感情に効く1曲</h3>
+    <p><strong>『Actually...』</strong> ─ 心の奥底から放たれる、決意の再出発。</p>
+    <a class="button" href="https://music.apple.com/jp/album/actually-special-edition/1612575157" target="_blank">🎵 曲を聴く（Apple Music）</a>
+    <p style="font-size: 13px; color: #6a4c93;">※MVは飛鳥＆山下ver.：<a href="https://www.youtube.com/watch?v=dPoPxRSifwc" target="_blank">YouTubeで観る</a></p>
+
+    <h4 style="margin-top: 30px;">🎶 他にも寄り添う楽曲たち</h4>
+    <ul>
+      <li><a href="https://music.apple.com/jp/album/%E5%83%95%E3%81%8C%E3%81%84%E3%82%8B%E5%A0%B4%E6%89%80/1538278246?i=1538278260" target="_blank">『僕がいる場所』</a> ─ 弱さを受け入れた先の“今ここにいる意味”。（Apple Music）</li>
+      <li><a href="https://youtu.be/9SS_uqzyhok?si=c1VRPMwWNZrYWURX" target="_blank">『命は美しい』</a> ─ つらさの先に見える「生きる意味」とその美しさ。</li>
+    </ul>
+  </div>
+</body>
+</html>
