@@ -6,6 +6,22 @@
   <title>中西アルノ『Actually...』 | 乃木坂ことだま箱</title>
   <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
   <style>
+    @keyframes fadeInZoom {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .kotodama {
+      display: inline-block;
+      opacity: 0;
+      animation: fadeInZoom 1s ease-out forwards;
+      animation-delay: 0.8s;
+      margin-top: 25px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #6a4c93;
+    }
+
     body { font-family: 'Klee One', sans-serif; background-color: #fff8f2; color: #4a355f; margin: 0; padding: 30px; }
     h1 { color: #6a4c93; font-size: 26px; }
     p { font-size: 16px; line-height: 1.8; }
@@ -48,7 +64,7 @@
     彼女は再びセンターとして『Actually…』をパフォーマンスした。<br><br>
 
     その姿には、批判や不安を越えて、もう一度向き合おうとする強さと覚悟が宿っていた。<br>
-    叫ぶように歌う彼女のパフォーマンスに、会場からは歓声とエールが送られ、空気は大きく揺さぶられた。
+    叫ぶように歌う彼女のパフォーマンスに、会場からは歓声とエールが送られ、<span class="kotodama">空気は大きく揺さぶられた。</span>
   </p>
 
   <div class="section">

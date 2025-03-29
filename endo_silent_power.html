@@ -6,6 +6,22 @@
   <title>遠藤さくら『静かな強さ』 | 乃木坂ことだま箱</title>
   <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
   <style>
+    @keyframes fadeInZoom {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .kotodama {
+      display: inline-block;
+      opacity: 0;
+      animation: fadeInZoom 1s ease-out forwards;
+      animation-delay: 0.8s;
+      margin-top: 25px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #6a4c93;
+    }
+
     body { font-family: 'Klee One', sans-serif; background-color: #fff8f2; color: #4a355f; margin: 0; padding: 30px; }
     h1 { color: #6a4c93; font-size: 26px; }
     p { font-size: 16px; line-height: 1.8; }
@@ -40,7 +56,7 @@
     すべてのメッセージを届け終えたあと、遠藤さくらは最後にひとこと、<br>
     静かに、けれど力強くこう言った。<br><br>
     「みんな、がんばろう。」<br><br>
-    その言葉が、今までの歩みとこれからをつなぐ、確かな“ことだま”として胸に残った。
+    その言葉が、今までの歩みとこれからをつなぐ、<span class="kotodama">確かな“ことだま”として胸に残った。</span>
   </p>
 
   <div class="section">
